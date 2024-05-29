@@ -4,31 +4,31 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const body_parser_1 = __importDefault(require("body-parser"));
+const category_controller_1 = require("./controllers/category-controller");
+const product_controller_1 = require("./controllers/product-controller");
 const app = (0, express_1.default)();
-const myLogger = function (req, res, next) {
-    console.log('METHOD:', req.method);
-    next();
-};
-app.use(myLogger);
+// parse application/json
+app.use(body_parser_1.default.json());
 app.get('/', (req, res) => {
     res.send('Hello World');
 });
-app.get('/api/products', (req, res) => {
-    const products = [
-        {
-            id: 1,
-            name: 'product 1'
-        },
-        {
-            id: 2,
-            name: 'product 2'
-        }
-    ];
-    res.json(products);
-});
-app.post('/api/products', (req, res) => {
-    res.send("POST Request to Server");
-});
+// Categories
+app.route('/categories')
+    .get(category_controller_1.getAllCategories)
+    .post(category_controller_1.createCategory);
+app.route('/categories/:categoryId')
+    .get(category_controller_1.getCategoryById)
+    .patch(category_controller_1.updateCategory)
+    .delete(category_controller_1.deleteCategory);
+// Products
+app.route('/products')
+    .get(product_controller_1.getAllProducts)
+    .post(product_controller_1.createProduct);
+app.route('/products/:productId')
+    .get(product_controller_1.getProductById)
+    .patch(product_controller_1.updateProduct)
+    .delete(product_controller_1.deleteProduct);
 app.listen(3000, () => {
-    console.log(` Server is running at http://localhost:3000`);
+    console.log(`Server is running at http://localhost:3000`);
 });

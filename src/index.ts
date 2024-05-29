@@ -1,36 +1,35 @@
 import express from 'express';
+import bodyParser from 'body-parser';
+import { createCategory, deleteCategory, getAllCategories, getCategoryById, updateCategory } from './controllers/category-controller';
+import { createProduct, deleteProduct, getAllProducts, getProductById, updateProduct } from './controllers/product-controller';
 const app = express();
 
-const myLogger = function (req, res, next) {
-  console.log('METHOD:', req.method)
-  next()
-}
-
-app.use(myLogger)
+// parse application/json
+app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
   res.send('Hello World')
 })
 
-app.get('/api/products', (req, res) => {
-  const products = [
-    {
-      id: 1,
-      name: 'product 1'
-    },
-    {
-      id: 2,
-      name: 'product 2'
+// Categories
+app.route('/categories')
+  .get( getAllCategories)
+  .post(createCategory)
+app.route('/categories/:categoryId')
+  .get(getCategoryById)
+  .patch(updateCategory)
+  .delete(deleteCategory)
 
-    }
-  ]
-  res.json(products)
-})
-
-app.post('/api/products', (req, res) => {
-  res.send("POST Request to Server")
-})
-
+// Products
+app.route('/products')
+  .get(getAllProducts)
+  .post(createProduct)
+app.route('/products/:productId')
+  .get(getProductById)
+  .patch(updateProduct)
+  .delete(deleteProduct)
+  
+  
 app.listen(3000, () => {
-  console.log(` Server is running at http://localhost:3000`)
+  console.log(`Server is running at http://localhost:3000`)
 })
