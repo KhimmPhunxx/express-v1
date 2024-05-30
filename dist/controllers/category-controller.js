@@ -11,11 +11,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteCategory = exports.updateCategory = exports.createCategory = exports.getCategoryById = exports.getAllCategories = void 0;
 const category_1 = require("../models/category");
+// get all categories
 const getAllCategories = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const categories = category_1.Category.getCategories;
     res.json({ message: "Successs!!", data: categories });
 });
 exports.getAllCategories = getAllCategories;
+// get category by id
 const getCategoryById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const categoryId = parseInt(req.params.categoryId);
     const category = category_1.Category.getCategories.filter((category) => category.id === categoryId);
@@ -26,6 +28,7 @@ const getCategoryById = (req, res) => __awaiter(void 0, void 0, void 0, function
     res.json({ message: "Success!!", data: category });
 });
 exports.getCategoryById = getCategoryById;
+// create a new category
 const createCategory = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const body = req.body;
     if (!(body === null || body === void 0 ? void 0 : body.name)) {
@@ -43,6 +46,7 @@ const createCategory = (req, res) => __awaiter(void 0, void 0, void 0, function*
     res.json({ message: "Category created successfully", data: newCategory });
 });
 exports.createCategory = createCategory;
+// update a category
 const updateCategory = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const categoryId = parseInt(req.params.categoryId);
     const body = req.body;
@@ -59,6 +63,7 @@ const updateCategory = (req, res) => __awaiter(void 0, void 0, void 0, function*
     res.json({ message: "Category updated successfully", data: category });
 });
 exports.updateCategory = updateCategory;
+// delete a category
 const deleteCategory = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const categoryId = parseInt(req.params.categoryId);
     const category = category_1.Category.getCategories.filter((category) => category.id === categoryId);

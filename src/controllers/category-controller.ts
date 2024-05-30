@@ -1,11 +1,13 @@
 import { Request, Response } from 'express';
 import { Category } from '../models/category';
 
+// get all categories
 const getAllCategories = async (req: Request, res: Response) => {
     const categories = Category.getCategories;
     res.json({ message: "Successs!!", data: categories });
 };
 
+// get category by id
 const getCategoryById = async (req: Request, res: Response) => {
     const categoryId = parseInt(req.params.categoryId);
 
@@ -21,6 +23,7 @@ const getCategoryById = async (req: Request, res: Response) => {
     res.json({ message: "Success!!", data: category });
 };
 
+// create a new category
 const createCategory = async (req: Request, res: Response) => {
     const body = req.body;
 
@@ -49,6 +52,7 @@ const createCategory = async (req: Request, res: Response) => {
     res.json({ message: "Category created successfully", data: newCategory });
 };
 
+// update a category
 const updateCategory = async (req: Request, res: Response) => {
     const categoryId = parseInt(req.params.categoryId);
     const body = req.body;
@@ -72,6 +76,7 @@ const updateCategory = async (req: Request, res: Response) => {
     res.json({ message: "Category updated successfully", data: category });
 };
 
+// delete a category
 const deleteCategory = async (req: Request, res: Response) => {
     const categoryId = parseInt(req.params.categoryId);
 

@@ -1,11 +1,13 @@
 import { Request, Response } from 'express';
 import { Product } from '../models/product';
 
+// get all products
 const getAllProducts = async (req: Request, res: Response) => {
     const products = Product.getProducts;
     res.json({ message: "Success!!", data: products });
 };
 
+// get product by id
 const getProductById = async (req: Request, res: Response) => {
     const productId = parseInt(req.params.productId);
 
@@ -21,6 +23,7 @@ const getProductById = async (req: Request, res: Response) => {
     res.json({ message: "Success!!", data: product });
 };
 
+// create a new product
 const createProduct = async (req: Request, res: Response) => {
     const body = req.body;
 
@@ -51,6 +54,7 @@ const createProduct = async (req: Request, res: Response) => {
 
 };
 
+// update a product
 const updateProduct = async (req: Request, res: Response) => {
     const productId = parseInt(req.params.productId);
     const body = req.body;
@@ -76,6 +80,7 @@ const updateProduct = async (req: Request, res: Response) => {
     res.json({ message: "Success!!", data: product });
 };
 
+// delete a product
 const deleteProduct = async (req: Request, res: Response) => {
     const productId = parseInt(req.params.productId);
 

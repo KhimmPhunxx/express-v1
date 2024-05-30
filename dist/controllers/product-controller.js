@@ -11,11 +11,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteProduct = exports.getProductById = exports.updateProduct = exports.createProduct = exports.getAllProducts = void 0;
 const product_1 = require("../models/product");
+// get all products
 const getAllProducts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const products = product_1.Product.getProducts;
     res.json({ message: "Success!!", data: products });
 });
 exports.getAllProducts = getAllProducts;
+// get product by id
 const getProductById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const productId = parseInt(req.params.productId);
     const product = product_1.Product.getProducts.filter((product) => product.id === productId);
@@ -26,6 +28,7 @@ const getProductById = (req, res) => __awaiter(void 0, void 0, void 0, function*
     res.json({ message: "Success!!", data: product });
 });
 exports.getProductById = getProductById;
+// create a new product
 const createProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const body = req.body;
     if (!(body === null || body === void 0 ? void 0 : body.name) || !(body === null || body === void 0 ? void 0 : body.price)) {
@@ -43,6 +46,7 @@ const createProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     res.json({ message: "Success!!", data: newProduct });
 });
 exports.createProduct = createProduct;
+// update a product
 const updateProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const productId = parseInt(req.params.productId);
     const body = req.body;
@@ -61,6 +65,7 @@ const updateProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     res.json({ message: "Success!!", data: product });
 });
 exports.updateProduct = updateProduct;
+// delete a product
 const deleteProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const productId = parseInt(req.params.productId);
     const product = product_1.Product.getProducts.filter((product) => product.id === productId);
